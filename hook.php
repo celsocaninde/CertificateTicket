@@ -9,8 +9,8 @@
  */
 
 
-require_once(__DIR__."/src/CertificateTicket.php");
-require_once(__DIR__."/src/Config.php");
+require_once(__DIR__ . "/src/CertificateTicket.php");
+require_once(__DIR__ . "/src/Config.php");
 use Dropdown as GlpiDropdown;
 
 
@@ -19,14 +19,15 @@ use Dropdown as GlpiDropdown;
  *
  * @return boolean
  */
-function plugin_certificateticket_install() {
+function plugin_certificateticket_install()
+{
 
    //We get the global db acces
    global $DB;
 
    /**
-   * May be used later
-   */
+    * May be used later
+    */
    //$migration = new Migration(PLUGIN_CERTIFICATETICKET_VERSION);
    //Config::setConfigurationValues('CertificateTicket', ['configuration' => false]);
 
@@ -35,16 +36,26 @@ function plugin_certificateticket_install() {
    $default_collation = DBConnection::getDefaultCollation();
    $default_key_sign = DBConnection::getDefaultPrimaryKeySignOption();
 
+   // Use Migration API for GLPI 11 compatibility
+   $migration = new Migration(PLUGIN_CERTIFICATETICKET_VERSION);
+
    // We create a table that'll stock if ticket was already created, to create only 1 ticket
    if (!$DB->tableExists("glpi_plugin_certificate_ticket")) {
-      $query = "CREATE TABLE `glpi_plugin_certificate_ticket` (
+      $table = 'glpi_plugin_certificate_ticket';
+
+      $migration->displayMessage("Creating table $table");
+
+      $query = "CREATE TABLE IF NOT EXISTS `$table` (
                   `id` int {$default_key_sign} NOT NULL auto_increment,
-                  `certificate_id` int,
-                  `ticket_id` int,
-                  `date` date,
-                PRIMARY KEY (`id`)
+                  `certificate_id` int NOT NULL DEFAULT 0,
+                  `ticket_id` int NOT NULL DEFAULT 0,
+                  `date` date DEFAULT NULL,
+                PRIMARY KEY (`id`),
+                KEY `certificate_id` (`certificate_id`),
+                KEY `ticket_id` (`ticket_id`)
       ) ENGINE=InnoDB DEFAULT CHARSET={$default_charset} COLLATE={$default_collation} ROW_FORMAT=DYNAMIC;";
-      $DB->query($query) or die("error creating glpi_plugin_certificate_ticket ". $DB->error());
+
+      $DB->doQuery($query) or die("Error creating $table: " . $DB->error());
    }
 
 
@@ -61,13 +72,15 @@ function plugin_certificateticket_install() {
  *
  * @return boolean
  */
-function plugin_certificateticket_uninstall() {
+function plugin_certificateticket_uninstall()
+{
    global $DB;
 
    // We drop the table when we uninstall the plugin
    if ($DB->tableExists("glpi_plugin_certificate_ticket")) {
-      $query = "DROP TABLE `glpi_plugin_certificate_ticket`";
-      $DB->query($query) or die("error deleting glpi_dropdown_plugin_example");
+      $table = 'glpi_plugin_certificate_ticket';
+      $query = "DROP TABLE IF EXISTS `$table`";
+      $DB->doQuery($query) or die("Error deleting $table: " . $DB->error());
    }
 
    // May be used later
@@ -76,9 +89,11 @@ function plugin_certificateticket_uninstall() {
 
    // We notify what is done when uninstall
    $notif = new Notification();
-   $options = ['itemtype' => 'Ticket',
-               'event'    => 'plugin_certificate_ticket',
-               'FIELDS'   => 'id'];
+   $options = [
+      'itemtype' => 'Ticket',
+      'event' => 'plugin_certificate_ticket',
+      'FIELDS' => 'id'
+   ];
    foreach ($DB->request('glpi_notifications', $options) as $data) {
       $notif->delete($data);
    }
@@ -87,7 +102,8 @@ function plugin_certificateticket_uninstall() {
 
 
 // Nothing to do here
-function plugin_certificateticket_postinit() {
+function plugin_certificateticket_postinit()
+{
    global $CFG_GLPI;
 
 }

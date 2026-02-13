@@ -150,15 +150,28 @@ class CertificateTicket extends CommonDBTM
                     $total++;
                     $ticket_id = $ticket->add($tkt);
 
-                    $query = "INSERT INTO `glpi_plugin_certificate_ticket` (`certificate_id`, `ticket_id`, `date`) VALUES (" . $certificate_data['id'] . ",$ticket_id,'" . $certificate_data['date_expiration'] . "')";
-                    $DB->query($query) or die("error populate glpi_plugin_example " . $DB->error());
+                    $DB->insert(
+                        'glpi_plugin_certificate_ticket',
+                        [
+                            'certificate_id' => $certificate_data['id'],
+                            'ticket_id' => $ticket_id,
+                            'date' => $certificate_data['date_expiration']
+                        ]
+                    );
                 } elseif ($certificate_data['date_expiration'] !== $certificate_data['date']) {
                     $task->addVolume(1);
                     $total++;
                     $ticket_id = $ticket->add($tkt);
 
-                    $query = "UPDATE `glpi_plugin_certificate_ticket` SET date='" . $certificate_data['date_expiration'] . "' WHERE certificate_id=" . $certificate_data['id'];
-                    $DB->query($query) or die("error populate glpi_plugin_example " . $DB->error());
+                    $DB->update(
+                        'glpi_plugin_certificate_ticket',
+                        [
+                            'date' => $certificate_data['date_expiration']
+                        ],
+                        [
+                            'certificate_id' => $certificate_data['id']
+                        ]
+                    );
                 }
             }
         }
