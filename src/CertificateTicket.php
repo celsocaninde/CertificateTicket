@@ -175,7 +175,8 @@ class CertificateTicket extends CommonDBTM
                 }
             }
         }
-        $task->log($ticket_id);
+
+        // Return status: -1 for errors, 1 for tickets created, 0 for no action needed
         return $errors > 0 ? -1 : ($total > 0 ? 1 : 0);
     }
 }
