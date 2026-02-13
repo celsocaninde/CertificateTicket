@@ -29,7 +29,7 @@ function plugin_certificateticket_install()
     * May be used later
     */
    //$migration = new Migration(PLUGIN_CERTIFICATETICKET_VERSION);
-   //Config::setConfigurationValues('CertificateTicket', ['configuration' => false]);
+   //PluginCertificateticketConfig::setConfigurationValues('CertificateTicket', ['configuration' => false]);
 
    //Used to configure the good parameters of the DB
    $default_charset = DBConnection::getDefaultCharset();
@@ -84,7 +84,7 @@ function plugin_certificateticket_uninstall()
    }
 
    // May be used later
-   //$config = new Config();
+   //$config = new PluginCertificateticketConfig();
    //$config->deleteConfigurationValues('CertificateTicket', ['configuration' => false]);
 
    // We notify what is done when uninstall

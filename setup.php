@@ -36,7 +36,7 @@ function plugin_init_certificateticket()
     * As of today, not used
     *
     */
-   //   Plugin::registerClass(Config::class, ['addtabon' => 'Config']);
+   //   Plugin::registerClass(PluginCertificateticketConfig::class, ['addtabon' => 'Config']);
 
    /**
     *

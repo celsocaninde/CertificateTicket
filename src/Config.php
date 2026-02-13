@@ -31,8 +31,10 @@
 /**
  * Config class for Certificate Ticket plugin
  * This class handles configuration for the plugin
+ * 
+ * Following GLPI naming convention: PluginNameConfig
  */
-class Config extends CommonDBTM
+class PluginCertificateticketConfig extends CommonDBTM
 {
 
    static protected $notable = true;
