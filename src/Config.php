@@ -28,26 +28,30 @@
  * -------------------------------------------------------------------------
  */
 
-namespace GlpiPlugin\CertificateTicket;
-use CommonDBTM;
-
-class Config extends CommonDBTM {
+/**
+ * Config class for Certificate Ticket plugin
+ * This class handles configuration for the plugin
+ */
+class Config extends CommonDBTM
+{
 
    static protected $notable = true;
 
-   static function configUpdate($input) {
+   static function configUpdate($input)
+   {
       $input['configuration'] = 1 - $input['configuration'];
       return $input;
    }
 
-   function showFormExample() {
+   function showFormExample()
+   {
       global $CFG_GLPI;
 
       if (!Session::haveRight("config", UPDATE)) {
          return false;
       }
 
-     
-}
+
+   }
 
 }
