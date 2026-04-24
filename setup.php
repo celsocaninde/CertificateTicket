@@ -10,6 +10,8 @@
 require_once(__DIR__ . "/src/CertificateTicket.php");
 require_once(__DIR__ . "/src/Config.php");
 use Glpi\Plugin\Hooks;
+use GlpiPlugin\Certificateticket\CertificateTicket;
+use GlpiPlugin\Certificateticket\PluginCertificateticketConfig;
 
 
 define('PLUGIN_CERTIFICATETICKET_VERSION', '0.0.3');

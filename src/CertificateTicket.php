@@ -1,5 +1,13 @@
 <?php
 
+namespace GlpiPlugin\Certificateticket;
+
+use Certificate;
+use CommonDBTM;
+use Entity;
+use Html;
+use Ticket;
+
 
 /**
  * -------------------------------------------------------------------------

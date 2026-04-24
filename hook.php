@@ -11,7 +11,7 @@
 
 require_once(__DIR__ . "/src/CertificateTicket.php");
 require_once(__DIR__ . "/src/Config.php");
-use Dropdown as GlpiDropdown;
+use GlpiPlugin\Certificateticket\CertificateTicket;
 
 
 /**

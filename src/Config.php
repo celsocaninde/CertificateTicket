@@ -1,5 +1,10 @@
 <?php
 
+namespace GlpiPlugin\Certificateticket;
+
+use CommonDBTM;
+use Session;
+
 /**
  * -------------------------------------------------------------------------
  * Example plugin for GLPI
