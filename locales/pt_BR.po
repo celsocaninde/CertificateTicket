@@ -1,0 +1,192 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Certificate Ticket\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-31 00:00+0000\n"
+"PO-Revision-Date: 2026-05-31 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: Português do Brasil\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "Certificate Ticket"
+msgstr "Certificate Ticket"
+
+msgid "Generated ticket"
+msgid_plural "Generated tickets"
+msgstr[0] "Chamado gerado"
+msgstr[1] "Chamados gerados"
+
+msgid "Automatic tickets for expiring certificates"
+msgstr "Chamados automáticos para certificados a vencer"
+
+msgid "Monitors your digital certificates and opens a ticket before they expire."
+msgstr "Monitora seus certificados digitais e abre um chamado antes do vencimento."
+
+msgid "Generated ticket settings"
+msgstr "Configuração do chamado gerado"
+
+msgid "How the ticket created for an expiring certificate should look"
+msgstr "Como deve ser o chamado criado para um certificado a vencer"
+
+msgid "Ticket category"
+msgstr "Categoria do chamado"
+
+msgid "Ticket type"
+msgstr "Tipo do chamado"
+
+msgid "Urgency"
+msgstr "Urgência"
+
+msgid "Automatic (based on days left)"
+msgstr "Automática (com base nos dias restantes)"
+
+msgid "Assigned group"
+msgstr "Grupo atribuído"
+
+msgid "Assigned technician"
+msgstr "Técnico atribuído"
+
+msgid "Use the entity certificate-alert delay"
+msgstr "Usar o prazo de alerta de certificados da entidade"
+
+msgid "When enabled, the lead time comes from Entity > Assistance > Certificates."
+msgstr "Quando ativo, o prazo vem de Entidade > Assistência > Certificados."
+
+msgid "Plugin lead time (days)"
+msgstr "Prazo do plugin (dias)"
+
+msgid "Used only when the entity delay is disabled."
+msgstr "Usado apenas quando o prazo da entidade está desativado."
+
+msgid "Reuse open ticket (followup)"
+msgstr "Reutilizar chamado aberto (acompanhamento)"
+
+msgid "Add a followup to the existing open ticket instead of creating a new one."
+msgstr "Adiciona um acompanhamento ao chamado aberto em vez de criar um novo."
+
+msgid "Escalating reminders"
+msgstr "Lembretes escalonados"
+
+msgid "Add a followup when the certificate crosses each threshold below."
+msgstr "Adiciona um acompanhamento quando o certificado cruza cada limite abaixo."
+
+msgid "Reminder thresholds (days)"
+msgstr "Limites de lembrete (dias)"
+
+msgid "Comma-separated list, e.g. 30,15,7,1"
+msgstr "Lista separada por vírgulas, ex: 30,15,7,1"
+
+msgid "Auto-resolve when renewed"
+msgstr "Resolver automaticamente ao renovar"
+
+msgid "Solve the open ticket once the certificate expiration moves to the future."
+msgstr "Soluciona o chamado aberto quando o vencimento do certificado for para o futuro."
+
+msgid "Link ticket to the certificate"
+msgstr "Vincular o chamado ao certificado"
+
+msgid "How it works"
+msgstr "Como funciona"
+
+msgid "A daily cron task checks every certificate. When the expiration date gets close, a richly formatted ticket is opened (and followups/solution are managed automatically)."
+msgstr "Uma tarefa diária verifica cada certificado. Quando a data de vencimento se aproxima, um chamado bem formatado é aberto (e acompanhamentos/solução são gerenciados automaticamente)."
+
+msgid "Expired"
+msgstr "Vencidos"
+
+msgid "Within 7 days"
+msgstr "Em até 7 dias"
+
+msgid "Within 30 days"
+msgstr "Em até 30 dias"
+
+msgid "Tickets generated"
+msgstr "Chamados gerados"
+
+msgid "Open tickets for expiring certificates"
+msgstr "Abrir chamados para certificados a vencer"
+
+msgid "Maximum days before expiration to look ahead"
+msgstr "Máximo de dias antes do vencimento a considerar"
+
+msgid "Expired %d day(s) ago"
+msgstr "Vencido há %d dia(s)"
+
+msgid "Expires in %d day(s)"
+msgstr "Vence em %d dia(s)"
+
+msgid "Digital certificate expiring"
+msgstr "Certificado Digital Expirando"
+
+msgid "Digital certificate renewal"
+msgstr "Renovação de Certificado Digital"
+
+msgid "Action required to keep services and communications secure"
+msgstr "Ação necessária para manter os serviços e a comunicação seguros"
+
+msgid "Certificate details"
+msgstr "Detalhes do certificado"
+
+msgid "Name"
+msgstr "Nome"
+
+msgid "Serial"
+msgstr "Serial"
+
+msgid "Inventory number"
+msgstr "Nº de inventário"
+
+msgid "Type"
+msgstr "Tipo"
+
+msgid "Expiration date"
+msgstr "Data de expiração"
+
+msgid "Days remaining"
+msgstr "Dias restantes"
+
+msgid "Contact"
+msgstr "Contato"
+
+msgid "Next steps"
+msgstr "Próximos passos"
+
+msgid "Check the current certificate validity"
+msgstr "Verificar a validade atual do certificado"
+
+msgid "Start the renewal with the certificate authority"
+msgstr "Iniciar a renovação junto à autoridade certificadora"
+
+msgid "Update the certificate on the affected systems"
+msgstr "Atualizar o certificado nos sistemas afetados"
+
+msgid "Validate operation after the update"
+msgstr "Validar o funcionamento após a atualização"
+
+msgid "Ticket generated automatically by the certificate monitoring system."
+msgstr "Chamado gerado automaticamente pelo sistema de monitoramento de certificados."
+
+msgid "Reminder: the certificate \"%s\" is getting closer to its expiration date. Please proceed with the renewal."
+msgstr "Lembrete: o certificado \"%s\" está se aproximando da data de vencimento. Por favor, prossiga com a renovação."
+
+msgid "Certificate \"%s\" renewed"
+msgstr "Certificado \"%s\" renovado"
+
+msgid "The expiration date is no longer imminent. This ticket was resolved automatically by the certificate monitoring system."
+msgstr "A data de vencimento não é mais iminente. Este chamado foi resolvido automaticamente pelo sistema de monitoramento de certificados."
+
+msgid "No ticket generated for this certificate yet."
+msgstr "Nenhum chamado gerado para este certificado ainda."
+
+msgid "Opened on"
+msgstr "Aberto em"
+
+msgid "A ticket was opened for an expiring certificate"
+msgstr "Um chamado foi aberto para um certificado a vencer"
+
+msgid "Expiring certificate"
+msgstr "Certificado a vencer"

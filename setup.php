@@ -14,7 +14,7 @@ use GlpiPlugin\Certificateticket\CertificateTicket;
 use GlpiPlugin\Certificateticket\PluginCertificateticketConfig;
 
 
-define('PLUGIN_CERTIFICATETICKET_VERSION', '0.0.3');
+define('PLUGIN_CERTIFICATETICKET_VERSION', '0.1.1');
 
 // Minimal GLPI version, inclusive
 define('PLUGIN_CERTIFICATETICKET_MIN_GLPI', '11.0.0');
@@ -31,37 +31,38 @@ function plugin_init_certificateticket()
 {
    global $PLUGIN_HOOKS, $CFG_GLPI;
 
-
-   /**
-    *
-    * Config class created to add in the future the possibility to customize the creation
-    * As of today, not used
-    *
-    */
-   //   Plugin::registerClass(PluginCertificateticketConfig::class, ['addtabon' => 'Config']);
-
-   /**
-    *
-    * Register the class that will create the ticket with an automated action
-    * 
-    *
-    */
-   Plugin::registerClass(
-      CertificateTicket::class,
-      ['notificationtemplates_types' => true]
-   );
-
-   // Config page
-/*   if (Session::haveRight('config', UPDATE)) {
-*      $PLUGIN_HOOKS['config_page']['certificateticket'] = 'front/config.php';
-*   }
-*/
-
-
-   $PLUGIN_HOOKS[Hooks::POST_INIT]['certificateticket'] = 'plugin_certificateticket_postinit';
-
    $PLUGIN_HOOKS[Hooks::CSRF_COMPLIANT]['certificateticket'] = true;
 
+   // Branded stylesheet for the config tab and the certificate tab (scoped to .certticket / .ct-*)
+   $PLUGIN_HOOKS[Hooks::ADD_CSS]['certificateticket'] = ['public/css/certificateticket.css'];
+
+   // Core class: cron + "Generated tickets" tab on the Certificate form
+   Plugin::registerClass(
+      CertificateTicket::class,
+      [
+         'notificationtemplates_types' => true,
+         'addtabon'                    => 'Certificate',
+      ]
+   );
+
+   // Configuration tab (Setup > General) + dedicated config page entry
+   if (Session::haveRightsOr('config', [READ, UPDATE])) {
+      Plugin::registerClass(PluginCertificateticketConfig::class, ['addtabon' => 'Config']);
+      $PLUGIN_HOOKS[Hooks::CONFIG_PAGE]['certificateticket'] = 'front/config.form.php';
+   }
+
+   // Housekeeping: drop tracking rows when the linked ticket or certificate is purged
+   $PLUGIN_HOOKS[Hooks::ITEM_PURGE]['certificateticket'] = [
+      'Ticket'      => [CertificateTicket::class, 'cleanupTicket'],
+      'Certificate' => [CertificateTicket::class, 'cleanupCertificate'],
+   ];
+
+   // Add our notification event to the core Certificate notification target
+   $PLUGIN_HOOKS[Hooks::ITEM_GET_EVENTS]['certificateticket'] = [
+      'NotificationTargetCertificate' => [CertificateTicket::class, 'addNotificationEvents'],
+   ];
+
+   $PLUGIN_HOOKS[Hooks::POST_INIT]['certificateticket'] = 'plugin_certificateticket_postinit';
 }
 
 
