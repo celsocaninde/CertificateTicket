@@ -19,6 +19,10 @@
       </authors>
       <versions>
          <version>
+            <num>0.1.2</num>
+            <compatibility>~11.0.0</compatibility>
+         </version>
+         <version>
             <num>0.1.1</num>
             <compatibility>~11.0.0</compatibility>
          </version>

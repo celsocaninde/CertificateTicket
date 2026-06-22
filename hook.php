@@ -73,8 +73,9 @@ function plugin_certificateticket_install()
       Config::setConfigurationValues(PluginCertificateticketConfig::CONFIG_CONTEXT, $defaults);
    }
 
-   // Register the daily cron task (idempotent)
-   CronTask::Register(CertificateTicket::class, 'CertificateTicket', DAY_TIMESTAMP, ['param' => 50]);
+   // Register the daily cron task (idempotent). The look-ahead window is driven
+   // by the plugin configuration (entity delay or "days_before"), not a cron param.
+   CronTask::Register(CertificateTicket::class, 'CertificateTicket', DAY_TIMESTAMP);
 
    // Install the e-mail notification (idempotent). It targets the certificate's
    // technician / group in charge using the core Certificate notification target.

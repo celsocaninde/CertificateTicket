@@ -270,6 +270,7 @@ class PluginCertificateticketConfig extends CommonDBTM
             ['expired',   'ti-alert-octagon', __('Expired', 'certificateticket'),      $stats['expired']],
             ['soon',      'ti-clock-exclamation', __('Within 7 days', 'certificateticket'), $stats['d7']],
             ['warn',      'ti-calendar-due', __('Within 30 days', 'certificateticket'), $stats['d30']],
+            ['ok',        'ti-calendar', __('Within 90 days', 'certificateticket'),    $stats['d90']],
             ['emerald',   'ti-ticket', __('Tickets generated', 'certificateticket'),   $stats['tickets']],
         ];
 

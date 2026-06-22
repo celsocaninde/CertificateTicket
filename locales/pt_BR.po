@@ -104,6 +104,9 @@ msgstr "Em até 7 dias"
 msgid "Within 30 days"
 msgstr "Em até 30 dias"
 
+msgid "Within 90 days"
+msgstr "Em até 90 dias"
+
 msgid "Tickets generated"
 msgstr "Chamados gerados"
 

@@ -14,7 +14,7 @@ use GlpiPlugin\Certificateticket\CertificateTicket;
 use GlpiPlugin\Certificateticket\PluginCertificateticketConfig;
 
 
-define('PLUGIN_CERTIFICATETICKET_VERSION', '0.1.1');
+define('PLUGIN_CERTIFICATETICKET_VERSION', '0.1.2');
 
 // Minimal GLPI version, inclusive
 define('PLUGIN_CERTIFICATETICKET_MIN_GLPI', '11.0.0');

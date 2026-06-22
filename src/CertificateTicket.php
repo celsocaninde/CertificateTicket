@@ -70,9 +70,11 @@ class CertificateTicket extends CommonDBTM
     public static function cronInfo($name): array
     {
         if ($name === 'CertificateTicket') {
+            // No 'parameter': the look-ahead window comes from the plugin
+            // configuration (entity certificate-alert delay or "days_before"),
+            // so the cron has no separate, conflicting parameter.
             return [
                 'description' => __('Open tickets for expiring certificates', 'certificateticket'),
-                'parameter'   => __('Maximum days before expiration to look ahead', 'certificateticket'),
             ];
         }
         return [];
@@ -616,21 +618,7 @@ class CertificateTicket extends CommonDBTM
     {
         global $DB;
 
-        $countCert = function (string $rawCond) use ($DB): int {
-            $res = $DB->request([
-                'COUNT' => 'cpt',
-                'FROM'  => 'glpi_certificates',
-                'WHERE' => [
-                    'is_deleted'  => 0,
-                    'is_template' => 0,
-                    ['NOT' => ['date_expiration' => null]],
-                    ['RAW' => [$rawCond => null]],
-                ],
-            ]);
-            return (int) ($res->current()['cpt'] ?? 0);
-        };
-
-        // Build conditions via RAW with embedded comparisons
+        // Each bucket is a COUNT over glpi_certificates with a DATEDIFF range.
         $expired = (int) ($DB->request([
             'COUNT' => 'cpt', 'FROM' => 'glpi_certificates',
             'WHERE' => ['is_deleted' => 0, 'is_template' => 0, ['NOT' => ['date_expiration' => null]],
@@ -662,8 +650,6 @@ class CertificateTicket extends CommonDBTM
             'COUNT' => 'cpt', 'FROM' => self::getTable(),
             'WHERE' => ['ticket_id' => ['>', 0]],
         ])->current()['cpt'] ?? 0);
-
-        unset($countCert); // not used (kept for clarity of intent)
 
         return ['expired' => $expired, 'd7' => $d7, 'd30' => $d30, 'd90' => $d90, 'tickets' => $tickets];
     }
